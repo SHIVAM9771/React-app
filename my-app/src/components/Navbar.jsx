@@ -1,9 +1,12 @@
-export default function Navbar() {
+import PropTypes from 'prop-types'
+
+
+export default function Navbar(props) {
     return (
         <>
             <nav className="navbar navbar-expand-lg bg-body-tertiary">
                 <div className="container-fluid">
-                    <a className="navbar-brand" href="#">Stockify</a>
+                    <a className="navbar-brand" href="#">{props.title}</a>
                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span className="navbar-toggler-icon"></span>
                     </button>
@@ -20,10 +23,10 @@ export default function Navbar() {
                                     Services
                                 </a>
                                 <ul className="dropdown-menu">
-                                    <li><a className="dropdown-item" href="#">Web-Development</a></li>
-                                    <li><a className="dropdown-item" href="#">Backend</a></li>
+                                    <li><a className="dropdown-item" href="#">{props.data.t1}</a></li>
+                                    <li><a className="dropdown-item" href="#">{props.data.t2}</a></li>
                                     <li><hr className="dropdown-divider" /></li>
-                                    <li><a className="dropdown-item" href="#">Python_Development</a></li>
+                                    <li><a className="dropdown-item" href="#">{props.data.t3}</a></li>
                                 </ul>
                             </li>
                             <li className="nav-item">
@@ -39,3 +42,17 @@ export default function Navbar() {
             </nav></>
     );
 };
+
+Navbar.prototype = {
+    title: PropTypes.string.isRequired,
+    data: PropTypes.object.isRequired
+}
+
+Navbar.defaultProps = {
+    title: "My App",
+    data: {
+        t1: "Service 1",
+        t2: "Service 2",
+        t3: "Service 3"
+    }
+}
