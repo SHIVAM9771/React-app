@@ -113,22 +113,22 @@ export default function TextManipulator(props) {
         </div>
 
         <div className="d-flex justify-content-center flex-wrap">
-          <button className="btn btn-outline-primary m-2" onClick={handleUpClick}>
+          <button disabled={text.length === 0} className="btn btn-outline-primary mx-2 my-2" onClick={handleUpClick}>
             <FaArrowUp /> Uppercase
           </button>
-          <button className="btn btn-outline-primary m-2" onClick={handleDownClick}>
+          <button disabled={text.length === 0} className="btn btn-outline-primary mx-2 my-2" onClick={handleDownClick}>
             <FaArrowDown /> Lowercase
           </button>
-          <button className="btn btn-outline-primary m-2" onClick={handleCapital}>
+          <button disabled={text.length === 0} className="btn btn-outline-primary mx-2 my-2" onClick={handleCapital}>
             <FaTextHeight /> Capitalize
           </button>
-          <button className="btn btn-outline-primary m-2" onClick={removeExtraSpaces}>
+          <button disabled={text.length === 0} className="btn btn-outline-primary mx-2 my-2" onClick={removeExtraSpaces}>
             <FaSpaceShuttle /> Remove Spaces
           </button>
-          <button className="btn btn-outline-success m-2" onClick={handleCopy}>
+          <button disabled={text.length === 0} className="btn btn-outline-success mx-2 my-2" onClick={handleCopy}>
             <FaCopy /> Copy
           </button>
-          <button className="btn btn-outline-danger m-2" onClick={handleClearClick}>
+          <button disabled={text.length === 0} className="btn btn-outline-danger mx-2 my-2" onClick={handleClearClick}>
             <FaTrash /> Clear
           </button>
         </div>

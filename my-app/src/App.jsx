@@ -6,11 +6,11 @@ import About from "./components/About";
 import Alert from "./components/Alert";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom"; // Correct imports for v6
 
-function App() {
+function App(cls) {
   const [mode, setMode] = useState('light'); // State variable for dark mode
   const [alert, setAlert] = useState("");
 
-  let data = {
+  let data = { 
     t1: "Service 1",
     t2: "This is service 2",
     t3: "Service 3"

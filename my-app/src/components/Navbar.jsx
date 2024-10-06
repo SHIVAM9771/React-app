@@ -14,9 +14,9 @@ export default function Navbar(props) {
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               <li className="nav-item">
-                <Link className="nav-link active" aria-current="page" to="/">Home</Link>
+                <Link className="nav-link" aria-current="page" to="/">Home</Link>
               </li>
-              <li className="nav-item">
+              {/* <li className="nav-item">
                 <Link className="nav-link" to="#">Projects</Link>
               </li>
               <li className="nav-item dropdown">
@@ -29,21 +29,24 @@ export default function Navbar(props) {
                   <li><hr className="dropdown-divider" /></li>
                   <li><Link className="dropdown-item" to="#">{props.data.t3}</Link></li>
                 </ul>
-              </li>
+              </li> */}
               <li className="nav-item">
                 <Link className="nav-link" to="/about">About</Link>
               </li>
             </ul>
+            {/* <div className="d-flex">
+              <div className="bg-primary rounded mx-2" onClick={props.toggleMode} style={{ height: '30px', width: '30px' }}></div>
+            </div> */}
             <div className={`form-check form-switch text-${props.mode === 'light' ? 'dark' : 'light'} mx-2`}>
               <input onClick={props.toggleMode} className="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" />
               <label className="form-check-label" htmlFor="flexSwitchCheckDefault">
                 {props.mode === 'light' ? 'Enable Dark Mode' : 'Enable Light Mode'}
               </label>
             </div>
-            <form className="d-flex search-bar">
+            {/* <form className="d-flex search-bar">
               <input className="form-control me-2" type="search" placeholder="Search..." aria-label="Search" />
               <button className={`btn btn-outline-success text-${props.mode === 'light' ? 'dark' : 'light'}`} type="submit">Search</button>
-            </form>
+            </form> */}
           </div>
         </div>
       </nav>

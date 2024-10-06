@@ -9,20 +9,21 @@ export default function Alert(props) {
     return '';
   };
 
-  useEffect(() => {
-    if (props.alert) {
-      document.body.style.overflow = 'hidden'; 
-    } else {
-      document.body.style.overflow = 'auto'; 
-    }
-    return () => {
-      document.body.style.overflow = 'auto'; 
-    };
-  }, [props.alert]);
+  // useEffect(() => {
+  //   if (props.alert) {
+  //     document.body.style.overflow = 'hidden';
+  //   } else {
+  //     document.body.style.overflow = 'auto';
+  //   }
+  //   return () => {
+  //     document.body.style.overflow = 'auto';
+  //   };
+  // }, [props.alert]);
 
   return (
-    props.alert && (
-      <div className='container my-3'>
+
+    <div className='container my-3' style={{ height: '50px' }}>
+      {props.alert && (
         <div className={`alert alert-${props.alert.type} alert-dismissible fade show d-flex align-items-center`} role="alert">
           <span className="me-2 alert-icon">
             {props.alert.type === 'success' && <i className="bi bi-check-circle-fill"></i>}
@@ -35,7 +36,7 @@ export default function Alert(props) {
           </div>
           <button type="button" className="btn-close ms-auto" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
-      </div>
-    )
+      )}
+    </div>
   );
 }
