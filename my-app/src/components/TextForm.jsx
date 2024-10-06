@@ -1,36 +1,40 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
+import { FaCopy, FaTrash, FaArrowUp, FaArrowDown, FaTextHeight, FaSpaceShuttle } from 'react-icons/fa';
 
-
-export default function (props) {
+export default function TextManipulator(props) {
   const handleUpClick = () => {
     if (text.length === 0) {
-      props.showAlert("No Text Found", "danger")
+      props.showAlert("No Text Found", "danger");
       return;
     }
     let newText = text.toUpperCase();
     setText(newText);
-    props.showAlert("Text Converted to Uppercase", "success")
+    props.showAlert("Text Converted to Uppercase", "success");
   }
+
   const handleDownClick = () => {
     if (!text) {
-      props.showAlert("No Text Found", "danger")
+      props.showAlert("No Text Found", "danger");
       return;
     }
-
     let newText = text.toLowerCase();
     setText(newText);
-    props.showAlert("Text Converted to Lowercase", "success")
+    props.showAlert("Text Converted to Lowercase", "success");
   }
 
   const handleClearClick = () => {
+    if (!text) {
+      props.showAlert("Nothing to clear..!", "warning");
+      return;
+    }
     let newText = '';
     setText(newText);
-    props.showAlert("Text Cleared", "success")
+    props.showAlert("Text Cleared", "success");
   }
 
   const handleCapital = () => {
     if (!text) {
-      props.showAlert("No Text Found", "danger")
+      props.showAlert("No Text Found", "danger");
       return;
     }
 
@@ -53,70 +57,104 @@ export default function (props) {
     }
 
     setText(capitalizedText);
-    props.showAlert("First Word Capitalized", "success")
+    props.showAlert("First Word Capitalized", "success");
   };
 
   const removeExtraSpaces = () => {
     if (!text) {
-      props.showAlert("No Text Found", "danger")
+      props.showAlert("No Text Found", "danger");
       return;
     }
 
     const cleanedText = text
-      .split("\n") // Split the text by new lines
-      .map(line => line.trim().replace(/\s+/g, " ")) // Trim and remove extra spaces in each line
-      .join("\n"); // Join the lines back with new line characters
+      .split("\n")
+      .map(line => line.trim().replace(/\s+/g, " "))
+      .join("\n");
 
-    setText(cleanedText); // Update the text state with the cleaned text
-    props.showAlert("Extra Spaces Removed", "success")
+    setText(cleanedText);
+    props.showAlert("Extra Spaces Removed", "success");
   };
 
   const handleCopy = () => {
+    if (!text) {
+      props.showAlert("Nothing to copy..!", "warning");
+      return;
+    }
     navigator.clipboard.writeText(text);
-    props.showAlert("Text Copied to Clipboard", "success")
+    props.showAlert("Text Copied to Clipboard", "success");
   }
 
   const handleOnChange = (event) => {
     setText(event.target.value);
   }
 
-
   const [text, setText] = useState("Enter your Text here..");
-
 
   return (
     <>
-      <div style={{ color: props.mode === 'dark' ? 'white' : 'black' }} className="container">
-        <h2 className='my-2 mt-2'>{props.heading}</h2>
+      <div style={{ color: props.mode === 'dark' ? 'white' : 'black' }} className="container mt-4 my-4">
+        <h2 className="text-center mb-4">{props.heading}</h2>
         <div className="mb-3">
-          <textarea className="form-control" id="myBox" rows="4" value={text} onChange={handleOnChange} style={{ backgroundColor: props.mode === 'dark' ? 'grey' : 'white', color: props.mode === 'dark' ? 'white' : 'black' }} ></textarea>
+          <textarea
+            className="form-control"
+            id="myBox"
+            rows="6"
+            value={text}
+            onChange={handleOnChange}
+            style={{
+              backgroundColor: props.mode === 'dark' ? '#2c3e50' : 'white',
+              color: props.mode === 'dark' ? 'white' : 'black',
+              borderRadius: '10px',
+              padding: '15px',
+              fontSize: '1rem',
+              border: '1px solid #ccc'
+            }}
+          />
         </div>
-        <button className="btn btn-primary mx-1" onClick={handleUpClick} >Convert to Uppercase</button>
-        <button className="btn btn-primary mx-1" onClick={handleDownClick} >Convert to Lowercase</button>
-        <button className="btn btn-primary mx-1" onClick={handleCapital} >Captalize First Word</button>
-        <button className="btn btn-primary mx-1" onClick={removeExtraSpaces} >Remove Extra Spaces</button>
-        <button className="btn btn-primary mx-1" onClick={handleCopy} >Copy</button>
-        <button className="btn btn-danger mx-1" onClick={handleClearClick} >Clear</button>
+
+        <div className="d-flex justify-content-center flex-wrap">
+          <button className="btn btn-outline-primary m-2" onClick={handleUpClick}>
+            <FaArrowUp /> Uppercase
+          </button>
+          <button className="btn btn-outline-primary m-2" onClick={handleDownClick}>
+            <FaArrowDown /> Lowercase
+          </button>
+          <button className="btn btn-outline-primary m-2" onClick={handleCapital}>
+            <FaTextHeight /> Capitalize
+          </button>
+          <button className="btn btn-outline-primary m-2" onClick={removeExtraSpaces}>
+            <FaSpaceShuttle /> Remove Spaces
+          </button>
+          <button className="btn btn-outline-success m-2" onClick={handleCopy}>
+            <FaCopy /> Copy
+          </button>
+          <button className="btn btn-outline-danger m-2" onClick={handleClearClick}>
+            <FaTrash /> Clear
+          </button>
+        </div>
       </div>
 
-      <div className="container my-4" style={{ color: props.mode === 'dark' ? 'white' : 'black' }} >
-        <h3>Your Text Summary</h3>
+      <div className="container my-4" style={{ color: props.mode === 'dark' ? 'white' : 'black' }}>
+        <h3>Text Summary</h3>
         <p>
-          <strong>{text.trim() ? text.split(/\s+/).filter(word => word).length : 0}</strong> words and 
+          <strong>{text.trim() ? text.split(/\s+/).filter(word => word).length : 0}</strong> words and
           <strong> {text.replace(/\s/g, "").length}</strong> characters
         </p>
+        <p>
+          <strong>{0.008 * (text.trim() ? text.split(/\s+/).filter(word => word).length : 0)}</strong> Minutes read
+        </p>
 
-        <p><strong>{0.008 * (text.trim() ? text.split(/\s+/).filter(word => word).length : 0)}</strong> Minutes read</p>
-        <h2>Preview</h2>
+        <h3>Preview</h3>
         <div style={{
-          backgroundColor: props.mode === 'dark' ? 'grey' : 'white',
+          backgroundColor: props.mode === 'dark' ? '#34495e' : '#f7f7f7',
           maxHeight: "200px",
           overflowY: "auto",
-          padding: "10px",
-          border: "1px solid #ccc",
+          padding: "15px",
+          border: "1px solid #ddd",
+          borderRadius: "5px",
           whiteSpace: "pre-wrap",
           wordWrap: "break-word",
-          borderRadius: "5px",
+          fontSize: "1.1rem",
           color: text.length > 0 ? 'inherit' : '#852029'
         }}>
           {text.length > 0
@@ -128,9 +166,7 @@ export default function (props) {
             ))
             : "Nothing to preview!"}
         </div>
-
       </div>
-
     </>
   );
 }
